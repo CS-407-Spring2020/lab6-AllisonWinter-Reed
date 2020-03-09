@@ -24,7 +24,7 @@ public class MainActivity extends FragmentActivity {
 
     //Somewhere in Australia
     private final LatLng mDestinationLatLng = new LatLng(-33.852341, 151.2106085);
-    private final LatLng bascomHall = new LatLng(43.0753078,-89.4216763);
+    private final LatLng bascomHall = new LatLng(43.0752778,-89.4041667);
     private GoogleMap mMap;
 
     private FusedLocationProviderClient mFusedLocationProviderClient;
@@ -66,6 +66,7 @@ public class MainActivity extends FragmentActivity {
             mFusedLocationProviderClient.getLastLocation().addOnCompleteListener(this, task -> {
                 Location mLastKnownLocation = task.getResult();
                 if (task.isSuccessful() && mLastKnownLocation != null) {
+                    mMap.addMarker(new MarkerOptions().position(new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude())).title("Current Location"));
                     mMap.addPolyline(new PolylineOptions().add(
                             new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()), bascomHall
                     ));
